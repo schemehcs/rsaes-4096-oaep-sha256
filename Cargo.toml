@@ -1,0 +1,9 @@
+[package]
+name = "rsaes-4096-oaep-sha256"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+rsa-4096 = { git = "https://github.com/schemehcs/rsa-4096.git" }
+oaep-4096 = { git = "https://github.com/schemehcs/oaep-4096.git" }
+rand = "0.10.1"
