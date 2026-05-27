@@ -5,5 +5,5 @@ edition = "2024"
 
 [dependencies]
 rsa-4096 = { git = "https://github.com/schemehcs/rsa-4096.git" }
-oaep-4096 = { git = "https://github.com/schemehcs/oaep-4096.git" }
+oaep-sha256 = { git = "https://github.com/schemehcs/oaep-sha256.git" }
 rand = "0.10.1"

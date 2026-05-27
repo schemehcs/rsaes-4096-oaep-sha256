@@ -216,9 +216,9 @@ dependencies = [
 ]
 
 [[package]]
-name = "oaep-4096"
+name = "oaep-sha256"
 version = "0.1.0"
-source = "git+https://github.com/schemehcs/oaep-4096.git#79d12747a13f08522505916659e23f149ebed152"
+source = "git+https://github.com/schemehcs/oaep-sha256.git#221b5d81c38c9a93a35f1f5bda73a08c3a11f572"
 dependencies = [
  "hex",
  "mgf1-sha256",
@@ -292,7 +292,7 @@ dependencies = [
 name = "rsaes-4096-oaep-sha256"
 version = "0.1.0"
 dependencies = [
- "oaep-4096",
+ "oaep-sha256",
  "rand",
  "rsa-4096",
 ]

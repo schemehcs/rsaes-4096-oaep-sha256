@@ -5,11 +5,15 @@ pub use rsa_4096::CryptErr;
 
 pub use rsa_4096::rand_rsa_suite;
 
+pub const MAX_BYTES: usize = 512;
+pub use oaep_sha256::HASH_LEN;
+
 pub fn encrypt(label: &[u8], message: &[u8], pub_key: &PubKey) -> Result<Vec<u8>, CryptErr> {
     let mut rand = rand::rng();
-    let mut seed = [0u8; 32];
+    let mut seed = [0u8; HASH_LEN];
     rand.fill_bytes(&mut seed);
-    let oaep_encoded = oaep_4096::encode(&seed, label, message).map_err(|_| CryptErr)?;
+    let oaep_encoded =
+        oaep_sha256::encode(MAX_BYTES, &seed, label, message).map_err(|_| CryptErr)?;
     rsa_4096::encrypt_slice(&oaep_encoded, pub_key)
 }
 
@@ -19,7 +23,7 @@ pub fn decrypt(
     priv_key: &PrivKey,
 ) -> Result<Vec<u8>, CryptErr> {
     let decrypted_oaep_padded = rsa_4096::decrypt_slice(encrypted_message, priv_key)?;
-    oaep_4096::decode(label, &decrypted_oaep_padded).map_err(|_| CryptErr)
+    oaep_sha256::decode(MAX_BYTES, label, &decrypted_oaep_padded).map_err(|_| CryptErr)
 }
 
 #[cfg(test)]
